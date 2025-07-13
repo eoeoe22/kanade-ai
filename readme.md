@@ -1,5 +1,6 @@
 카나데를 연기하는 Google Gemini 기반 챗봇!
 
+써보기 : kanade.eoe253326.workers.dev 
 
 
 
