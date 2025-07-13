@@ -1,0 +1,46 @@
+name = "kanade"
+# Workers에서 생성할 프로젝트 이름이랑 똑같이 적기
+
+
+main = "src/index.js"
+compatibility_date = "2023-12-01"
+assets = { directory = "./public" }
+#여기는 건들지마
+
+
+
+[vars]
+GEMINI_API_KEY = "ㅇㅇㅇㅇㅇ"
+
+# api키 미등록자들 요청 처리하는 api키
+# 많이써도 과금 안되니까 걱정 ㄴㄴ
+# 1분당 요청횟수 제한 걸리면 그냥 잠깐 먹통되고, 조금 기다리면 금방 돌아옴
+
+TURNSTILE_SITE_KEY = "ㅇㅇㅇㅇ"
+TURNSTILE_SECRET_KEY = "ㅇㅇㅇㅇㅇ"
+# 이거 세팅 안하면 로그인이랑 회원가입 고장남
+
+
+DISCORD_WEBHOOK = ""
+# 지금은 작동 안하는 기능임 
+# 비워두는건 상관없는데, 괜히 지우면 고장날수도?
+ADMIN_PASSWORD = "공지 수정하는 관리자페이지 비번인데, 관리자페이지 고장남 ㅋ"
+# 관리자페이지 가서 수정하지 말고, DB에 notices 부분 직접 건드려서 수정하셈...
+# 줄바꿈은 <br>
+DOMAIN = "https://example.com"
+# 이것도 안쓰는 기능이긴 한데, 괜히 지우면 고장날수도? 아님말고
+
+
+[[d1_databases]]
+binding = "DB"
+database_name = "kanade"
+database_id = "ㅇㅇㅇㅇㅇㅇ"
+# D1 데이터베이스 연결 관련 설정부분
+# 똑바로 세팅해야함
+
+
+# Workers Logs 
+[observability]
+enabled = true
+head_sampling_rate = 1.0
+# 안쓰는기능이긴 한데 놔두는거 추천
