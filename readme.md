@@ -149,4 +149,5 @@
 
 ---
 
-
+아이디어 구상 : 나
+실제 코드 작성 : Claude 4 Sonnet, Gemini 2.5 Pro 딸-깍
