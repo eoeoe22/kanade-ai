@@ -1,3 +1,8 @@
+카나데를 연기하는 Google Gemini 기반 챗봇!
+
+
+
+
 <img width="1368" height="1368" alt="Image" src="https://download.logo.wine/logo/Cloudflare/Cloudflare-Logo.wine.png" />
 <img width="1368" height="1368" alt="Image" src="https://logowik.com/content/uploads/images/google-ai-gemini91216.logowik.com.webp" />
 
@@ -150,4 +155,5 @@
 ---
 
 아이디어 구상 : 나
+
 실제 코드 작성 : Claude 4 Sonnet, Gemini 2.5 Pro 딸-깍
