@@ -132,7 +132,7 @@
 
 ## 13. 관리자 비밀번호 및 공지사항
 
-- **관리자 비밀번호는 wrangler.toml의 `ADMIN_PASSWORD`에 적힌 값이다.**
+- **관리자 비밀번호는 wrangler.toml의 `ADMIN_PASSWORD`에 적힌 값이긴 한데, 공지사항 수정기능 고장난거 방치해서 작동안한다.**
 - **공지사항은 DB의 `notices` 테이블에서 직접 수정한다.**
   - 줄바꿈은 `<br>` 태그를 사용한다.
 
@@ -144,7 +144,9 @@
 - **Turnstile 키를 꼭 입력해야 로그인/회원가입이 정상적으로 동작한다.**
 - **D1 데이터베이스 연결도 꼭 확인한다.**
 - **wrangler.toml 파일은 꼭 저장 후 GitHub에 다시 업로드한다.**
-- **문제가 생기면 Cloudflare Workers 로그를 확인한다.**
+
+- **헷갈리는게 있다면 일단 ai에 물어보고, https://m.dcinside.com/board/pjsekaikr/1390118 댓글에 찾아오기**
 
 ---
+
 
