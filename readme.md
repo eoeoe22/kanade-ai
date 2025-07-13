@@ -1,15 +1,19 @@
-<img width="1368" height="1368" alt="Image" src="https://github.com/user-attachments/assets/9a1f0177-ccbb-481a-9882-1f8665d08ffc" />
+<img width="1368" height="1368" alt="Image" src="https://download.logo.wine/logo/Cloudflare/Cloudflare-Logo.wine.png" />
 <img width="1368" height="1368" alt="Image" src="https://logowik.com/content/uploads/images/google-ai-gemini91216.logowik.com.webp" />
 
 # 세팅법
 ---
 
-## 1. 준비물
+## 1. 준비하기
+
+우선, 감사의 마음을 가득 담아서 클라우드플레어와 구글의 본사가 있는 미국 캘리포니아로 큰절을 한번 한다.
+
+필요한 준비물 목록
 
 - **구글 계정** (Gemini API 키 발급용)
 - **깃허브 계정** (소스코드 저장용)
 - **클라우드플레어 계정** (배포 및 관리용)
-- **노트패드/메모장** (설정값 기록용)
+- **메모장** (설정값 기록용)
 
 ---
 
