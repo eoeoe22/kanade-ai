@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 페이지 - 카나데 챗봇</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="admin-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h2>관리자 페이지</h2>
+                <p>공지사항 관리</p>
+            </div>
+
+            <div id="loginSection">
+                <form id="adminLoginForm">
+                    <div class="form-group">
+                        <label for="adminPassword" class="form-label">관리자 비밀번호</label>
+                        <input type="password" class="form-control" id="adminPassword" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">로그인</button>
+                </form>
+            </div>
+
+            <div id="adminPanel" style="display: none;">
+                <form id="noticeForm">
+                    <div class="form-group">
+                        <label for="noticeContent" class="form-label">공지사항 내용</label>
+                        <textarea class="form-control" id="noticeContent" name="content" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">공지사항 업데이트</button>
+                </form>
+                <div class="text-center mt-3">
+                    <button id="logoutAdminBtn" class="btn btn-secondary w-100">로그아웃</button>
+                </div>
+            </div>
+            
+            <div id="errorMessage" class="error-message mt-3" style="display: none;"></div>
+            <div id="successMessage" class="success-message mt-3" style="display: none;"></div>
+        </div>
+    </div>
+    <script src="/js/admin.js"></script>
+</body>
+</html>
