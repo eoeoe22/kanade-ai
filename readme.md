@@ -134,3 +134,184 @@ CREATE TABLE files (id INTEGER PRIMARY KEY AUTOINCREMENT, user_id INTEGER NOT NU
 *   **공지사항 수정**: 현재 관리자 페이지(`admin.html`)는 정상적으로 작동하지 않습니다. 고치기 귀찮습니다. 공지사항을 수정하려면, D1 데이터베이스 콘솔에서 `notices` 테이블의 `content` 필드를 직접 수정해야 합니다. 텍스트 내에서 줄바꿈이 필요할 경우 `<br>` 태그를 사용하세요. 부트스트랩 아이콘 라이브러리도 사용 가능합니다. `<i class="bi bi-아이콘이름"></i>`를 그대로 붙여넣을수 있습니다. 다른 HTML 태그들도 사용이 가능하나, 어떻게 동작할지 모르니 주의해서 작성하세요.
 *   **프롬프트 수정**: 챗봇의 성격과 응답 방식은 `wrangler.toml` 파일의 `SYSTEM_PROMPT` 변수에 의해 결정됩니다. 캐릭터의 설정을 변경하고 싶다면 이 부분을 수정 후 다시 배포(Commit & Push)하세요.
 
+---
+
+
+# 다른 캐릭터로 개조하는 방법
+
+기존 가이드에 추가하여, 카나데 AI 챗봇을 다른 캐릭터로 개조하는 방법을 안내합니다.
+
+## ⚠️ 중요 사항
+
+**현재 적용된 모든 커스텀 이모지들은 '요이사키 카나데' 전용 이모지입니다.** 다른 캐릭터로 수정할 경우, `public/images/emojis/` 폴더의 모든 이모지 파일을 해당 캐릭터에 맞는 이모지로 **완전히 교체**해야 합니다.
+
+## 캐릭터 변경 단계별 가이드
+
+### 1단계: 프로젝트 이름 및 식별자 변경
+
+#### 1-1. `wrangler.toml` 파일 수정
+```toml
+# 프로젝트 이름을 새 캐릭터에 맞게 변경
+name = "새캐릭터이름-ai"  # 예: "miku-ai", "sayaka-ai" 등
+
+# 데이터베이스 이름도 변경 (새로 생성해야 함)
+[[d1_databases]]
+binding = "DB"
+database_name = "새캐릭터이름"  # 예: "miku", "sayaka" 등
+database_id = "새로생성할D1데이터베이스ID"
+
+# R2 버킷 이름도 변경 (새로 생성해야 함)
+[[r2_buckets]]
+binding = "R2"
+bucket_name = "새캐릭터이름-images"  # 예: "miku-images"
+```
+
+#### 1-2. GitHub 리포지토리 이름 변경
+- 기존 `kanade-ai` 리포지토리를 새 이름(예: `miku-ai`)으로 변경하거나 새로 생성
+
+### 2단계: 캐릭터 페르소나 및 프롬프트 변경
+
+#### 2-1. `SYSTEM_PROMPT` 완전 교체
+`wrangler.toml` 파일의 `SYSTEM_PROMPT` 변수를 새 캐릭터에 맞게 **완전히 다시 작성**합니다:
+
+```toml
+SYSTEM_PROMPT = """
+지금부터 아래 지침에 따라 캐릭터 "새캐릭터이름"을 연기합니다.
+
+1. 캐릭터 가이드라인
+    이름/정체성 : [새 캐릭터의 이름과 설정]
+    신체 : [새 캐릭터의 신체적 특징]
+    거주/생활 : [새 캐릭터의 생활 환경]
+    성격 키워드 : [새 캐릭터의 성격 특징들]
+    취향·습관 : [새 캐릭터의 취향과 습관]
+
+2. 대화 스타일 가이드
+    기본 어조 : [새 캐릭터의 말투]
+    주요 특징 : [새 캐릭터만의 언어적 특징들]
+    
+3. 배경·심리 디테일
+    [새 캐릭터의 심리적 배경과 특성]
+
+4. 커스텀 이모지 사용법
+    [새 캐릭터에 맞는 이모지 목록으로 교체]
+
+5. 주의사항
+    [새 캐릭터에 맞는 주의사항들]
+"""
+```
+
+### 3단계: 이미지 및 시각적 요소 교체
+
+#### 3-1. 프로필 이미지 교체
+- `public/images/kanade-profile.webp`를 새 캐릭터의 프로필 이미지로 교체
+- 파일명을 `새캐릭터이름-profile.webp`로 변경 권장
+
+#### 3-2. **커스텀 이모지 완전 교체 (필수)**
+`public/images/emojis/` 폴더의 **모든 이모지 파일을 삭제**하고, 새 캐릭터에 맞는 이모지들로 교체:
+
+**현재 카나데 전용 이모지 목록:**
+```
+음악감상.gif, 노래부르기.png, 기대중.png, 빤히쳐다보기.png, 
+내놔.png, (물음표다섯개를띄우며)당황.png, 쓰다듬어주기.png, 
+좋아요버튼누르기.png, 메모.png, 놀람.png, 메롱.png, 귀여운척.png,
+이거진짜에요.png, 인정ㄹㅇㅋㅋ.png, 지쳤어.png, 부끄러움.png,
+눈치보는중.png, 안아주기.png, 만족스러운표정.png, 잘자.png,
+안돼애.png, (작업도중)놀람.gif, 웃으며손내밀기.png,
+(작업도중)뒤돌아보기.gif, (손을내밀며)네가필요해.gif,
+키보드연주.gif, 헤드폰소리에집중.gif, 절망.gif
+```
+
+**새 캐릭터 이모지로 교체 시 주의사항:**
+- 파일명은 한글 포함 가능하지만 특수문자 주의
+- 지원 형식: `.jpg`, `.jpeg`, `.png`, `.gif`
+- `SYSTEM_PROMPT`의 이모지 목록도 새 파일명에 맞게 수정 필요
+
+### 4단계: HTML 파일 텍스트 수정
+
+#### 4-1. 페이지 제목 및 텍스트 변경
+모든 HTML 파일에서 "카나데"와 관련된 텍스트를 새 캐릭터명으로 변경:
+
+**수정해야 할 파일들:**
+- `public/chat.html`
+- `public/login.html` 
+- `public/register.html`
+- `public/admin.html`
+
+**변경 예시:**
+```html
+<!-- 기존 -->
+<title>카나데 챗봇</title>
+<h5 class="profile-name">요이사키 카나데</h5>
+
+<!-- 변경 후 -->
+<title>새캐릭터이름 챗봇</title>
+<h5 class="profile-name">새캐릭터이름</h5>
+```
+
+#### 4-2. 이미지 경로 수정
+HTML에서 프로필 이미지 경로 수정:
+```html
+<!-- 기존 -->
+<img src="/images/kanade-profile.webp" alt="카나데" class="profile-image">
+
+<!-- 변경 후 -->
+<img src="/images/새캐릭터이름-profile.webp" alt="새캐릭터이름" class="profile-image">
+```
+
+### 5단계: JavaScript 코드 수정
+
+#### 5-1. `public/js/chat.js` 수정
+기본 메시지 및 캐릭터 관련 텍스트 변경:
+```javascript
+// 기존
+<img src="/images/kanade-profile.webp" alt="카나데" class="message-avatar">
+
+// 변경 후  
+<img src="/images/새캐릭터이름-profile.webp" alt="새캐릭터이름" class="message-avatar">
+```
+
+#### 5-2. 랜딩 페이지 수정
+`src/index.js`의 `getLandingPage()` 함수에서 캐릭터 정보 변경:
+```javascript
+<h1 class="welcome-title">새캐릭터이름 챗봇</h1>
+<p class="welcome-subtitle">Gemini 기반 새캐릭터이름 AI 챗봇</p>
+<img src="/images/새캐릭터이름-profile.webp" alt="새캐릭터이름" class="profile-image">
+```
+
+### 6단계: Cloudflare 서비스 재설정
+
+#### 6-1. 새 서비스 생성
+- **새 D1 데이터베이스** 생성 (새 캐릭터명으로)
+- **새 R2 버킷** 생성 (새 캐릭터명으로)
+- 기존 Turnstile 설정은 재사용 가능
+
+#### 6-2. 새 Workers 프로젝트 배포
+- 수정된 코드로 새 Workers 프로젝트 생성
+- 데이터베이스 테이블 생성 (5단계 동일)
+
+## 체크리스트
+
+캐릭터 변경 시 다음 항목들을 모두 확인하세요:
+
+### 필수 변경 사항
+- [ ] `wrangler.toml` - 프로젝트명, 데이터베이스명, R2 버킷명
+- [ ] `SYSTEM_PROMPT` - 캐릭터 페르소나 완전 교체
+- [ ] **모든 커스텀 이모지 파일 교체** (카나데 → 새캐릭터)
+- [ ] 프로필 이미지 교체
+- [ ] HTML 파일들의 제목 및 캐릭터명
+- [ ] JavaScript의 이미지 경로 및 텍스트
+- [ ] 새 Cloudflare 서비스 생성 및 연결
+
+### 선택 사항
+- [ ] CSS 색상 테마 변경 (`public/css/style.css`)
+- [ ] 랜딩 페이지 소개 텍스트 변경
+- [ ] 공지사항 초기 내용 설정
+
+## ⚠️ 재확인 사항
+
+1. **이모지 호환성**: 새 캐릭터 이모지의 파일명이 `SYSTEM_PROMPT`의 이모지 목록과 정확히 일치하는지 확인
+2. **이미지 경로**: 모든 HTML/JS 파일에서 새 프로필 이미지 경로가 올바른지 확인  
+3. **프로젝트명 일관성**: `wrangler.toml`의 `name`과 Cloudflare Workers 프로젝트명이 일치하는지 확인
+4. **데이터베이스 연결**: 새 D1 데이터베이스 ID가 올바르게 설정되었는지 확인
+
+이 과정을 완료하면 완전히 새로운 캐릭터의 AI 챗봇을 운영할 수 있습니다.
